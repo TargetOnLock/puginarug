@@ -28,6 +28,7 @@ const levels = {
 
 const startTime = Date.now();
 
+// Set up canvas size and translation
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 context.translate(window.innerWidth / 2, window.innerHeight / 2);
