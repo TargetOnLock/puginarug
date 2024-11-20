@@ -44,26 +44,34 @@
       font-weight: bold;
     }
 
-    .seconds, .grade {
+    .status-container {
       position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      color: white;
+      bottom: 100px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
       z-index: 10;
+      font-family: 'Courier New', Courier, monospace;
+      color: #00ff00;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
     }
 
-    .grade {
-      top: 50px;
+    .seconds, .grade {
+      margin: 0;
     }
   </style>
 </head>
 <body>
   <canvas></canvas>
-  <div class="seconds">0</div>
-  <div class="grade">Assistant</div>
+  <div class="status-container">
+    <div class="seconds">0</div>
+    <div class="grade">Assistant</div>
+  </div>
   <div class="sitter">
     <a class="twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsuirugpug.com&via=SUIRUGPUG&text=Do%20you%20love%20the%20pug?" target="_blank">Twitter</a>
     <a class="yt" href="https://T.ME/PUGINARUGSUI" target="_blank">Telegram</a>
