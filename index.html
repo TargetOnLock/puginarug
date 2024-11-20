@@ -44,10 +44,12 @@
       font-weight: bold;
     }
 
+    /* Center the status container and place it at the bottom */
     .status-container {
       position: fixed;
-      bottom: 100px;
-      right: 20px;
+      bottom: 100px; /* Positioned above the buttons */
+      left: 50%;
+      transform: translateX(-50%); /* This centers the div horizontally */
       background-color: rgba(0, 0, 0, 0.7);
       padding: 10px;
       border-radius: 5px;
@@ -55,6 +57,7 @@
       font-family: 'Courier New', Courier, monospace;
       color: #00ff00;
       font-size: 16px;
+      text-align: center; /* Center the text inside */
       display: flex;
       flex-direction: column;
       align-items: center;
