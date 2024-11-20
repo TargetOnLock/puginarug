@@ -2,8 +2,8 @@ const canvas = document.querySelector("canvas");
 const secondsCount = document.querySelector(".seconds");
 const level = document.querySelector(".grade");
 const context = canvas.getContext("2d");
-const pugDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
 
+const pugDimensions = { width: 353 * 1.2, height: 325 * 1.2 };
 
 const levels = {
   5: "Sr Assistant",
@@ -23,8 +23,8 @@ const levels = {
   4500: "Lord",
   10500: "OverLord",
   20500: "King",
-  30500: "Anunnaki"
-}
+  30500: "Anunnaki",
+};
 
 const startTime = Date.now();
 
@@ -33,23 +33,23 @@ canvas.height = window.innerHeight;
 context.translate(window.innerWidth / 2, window.innerHeight / 2);
 
 const image = new Image();
-image.src = "./assets/pug.png"; // Photo credit to Matthew Henry (https://unsplash.com/photos/U5rMrSI7Pn4)
+image.src = "./assets/pug.png"; // Replace with your image path
 
-const loopingPugs = 40; // 125 pugs required to cover a full 4K television screen. Tested via Firefox DevTools
+const loopingPugs = 40;
 const offsetDistance = 120;
 let currentOffset = 0;
 
-const movementRange = 200
+const movementRange = 200;
 
 const mouseOffset = {
   x: 0,
-  y: 0
-}
+  y: 0,
+};
 
 const movementOffset = {
   x: 0,
-  y: 0
-}
+  y: 0,
+};
 
 image.onload = () => {
   startLooping();
@@ -58,37 +58,37 @@ image.onload = () => {
 window.onresize = () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  context.setTransform(1, 0, 0, 1, 0, 0); //Reset the canvas context
+  context.setTransform(1, 0, 0, 1, 0, 0); // Reset the canvas context
   context.translate(window.innerWidth / 2, window.innerHeight / 2);
 };
 
-window.addEventListener('mousemove', onMouseMove)
+window.addEventListener("mousemove", onMouseMove);
 
 function draw(offset, loopCount) {
-
-  let currentPercentage = (loopingPugs - loopCount) / loopingPugs
+  let currentPercentage = (loopingPugs - loopCount) / loopingPugs;
   context.drawImage(
     image,
-    -pugDimensions.width / 2 - offset/2 + (movementOffset.x * currentPercentage),
-    -pugDimensions.height / 2 - offset/2 + (movementOffset.y * currentPercentage),
+    -pugDimensions.width / 2 - offset / 2 + movementOffset.x * currentPercentage,
+    -pugDimensions.height / 2 - offset / 2 + movementOffset.y * currentPercentage,
     pugDimensions.width + offset,
     pugDimensions.height + offset
   );
 }
 
 function onMouseMove(e) {
-  mouseOffset.x = (e.clientX - window.innerWidth / 2) / window.innerWidth / 2 * movementRange
-  mouseOffset.y = (e.clientY - window.innerHeight / 2) / window.innerHeight / 2 * movementRange
+  mouseOffset.x = ((e.clientX - window.innerWidth / 2) / window.innerWidth) * 2 * movementRange;
+  mouseOffset.y = ((e.clientY - window.innerHeight / 2) / window.innerHeight) * 2 * movementRange;
 }
 
 function lerp(start, end, amount) {
-  return start*(1-amount)+end*amount
+  return start * (1 - amount) + end * amount;
 }
 
 function loopDraw() {
+  movementOffset.x = lerp(movementOffset.x, mouseOffset.x, 0.05);
+  movementOffset.y = lerp(movementOffset.y, mouseOffset.y, 0.05);
 
-  movementOffset.x = lerp(movementOffset.x, mouseOffset.x, 0.05)
-  movementOffset.y = lerp(movementOffset.y, mouseOffset.y, 0.05)
+  context.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
 
   for (let i = loopingPugs; i >= 1; i--) {
     draw(i * offsetDistance + currentOffset, i);
@@ -105,8 +105,8 @@ function loopDraw() {
 
   secondsCount.innerText = newTime;
 
-  if(levels[newTime]) {
-    level.innerText = levels[newTime]
+  if (levels[newTime]) {
+    level.innerText = levels[newTime];
   }
 
   requestAnimationFrame(loopDraw);
