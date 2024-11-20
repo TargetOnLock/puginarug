@@ -33,7 +33,7 @@ canvas.height = window.innerHeight;
 context.translate(window.innerWidth / 2, window.innerHeight / 2);
 
 const image = new Image();
-image.src = "./assets/pug.png"; // Replace with your image path
+image.src = "./assets/pug.png"; // Ensure this path is correct
 
 const loopingPugs = 40;
 const offsetDistance = 120;
@@ -88,7 +88,7 @@ function loopDraw() {
   movementOffset.x = lerp(movementOffset.x, mouseOffset.x, 0.05);
   movementOffset.y = lerp(movementOffset.y, mouseOffset.y, 0.05);
 
-  context.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+  context.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);  // Clear canvas to prevent overlap
 
   for (let i = loopingPugs; i >= 1; i--) {
     draw(i * offsetDistance + currentOffset, i);
